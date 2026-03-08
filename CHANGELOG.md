@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **API Documentation**: Added OpenAPI 3.0 (Swagger) support to the `read-service` for enhanced API discoverability and testing.
 
+### Changed
+- **Agent Infrastructure**: Migrated agent workflows from `.agents/workflows` to `.agent/skills` to align with the official Antigravity Skills specification. Created standard `SKILL.md` configurations with relative environment-agnostic paths.
+
 ## [1.0.0] - 2026-03-08
 
 ### Added

@@ -1,18 +1,21 @@
 ---
+name: Database Migrations
 description: Apply database migrations for read-service using goose
 ---
 # Database Migrations
 
-This workflow is used when updating database schemas for the `read-service`. The service uses `goose` for handling migrations against a PostgreSQL database.
+## Context
+This skill is used when updating database schemas for the `read-service`. The service uses `goose` for handling migrations against a PostgreSQL database.
 
+## Guidelines
 1. Make sure the local database is running (usually via docker-compose).
    ```bash
    docker compose up -d postgres
    ```
 
-2. Navigate to the `read-service` directory.
+2. Navigate to the `read-service` directory (assuming execution from project root).
    ```bash
-   cd /Users/sergiigagauz/Public/DevelopmentProjects/anomaly_detection_platform/read-service
+   cd read-service
    ```
 
 3. Export the standard local Database URL (adjust if the password/db changes).
@@ -30,3 +33,6 @@ This workflow is used when updating database schemas for the `read-service`. The
    ```bash
    go run github.com/pressly/goose/v3/cmd/goose@latest -dir db/migrations create <migration_name> sql
    ```
+
+## Verification
+- Check the output of the migration command to ensure all migrations were applied successfully.

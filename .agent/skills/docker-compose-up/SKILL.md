@@ -1,14 +1,14 @@
 ---
+name: Start Local Infrastructure
 description: Start local infrastructure and services via Docker Compose
 ---
 # Start Local Infrastructure
 
-This workflow is used to spin up the entire application stack or just the infrastructure dependencies (like NATS and PostgreSQL) locally for development and testing.
+## Context
+This skill is used to spin up the entire application stack or just the infrastructure dependencies (like NATS and PostgreSQL) locally for development and testing.
 
-1. Navigate to the project root directory.
-   ```bash
-   cd /Users/sergiigagauz/Public/DevelopmentProjects/anomaly_detection_platform
-   ```
+## Guidelines
+1. Ensure you are in the project root directory where the `docker-compose.yml` file is located.
 
 // turbo
 2. Start the core infrastructure and services in detached mode.
@@ -25,3 +25,6 @@ This workflow is used to spin up the entire application stack or just the infras
    ```bash
    docker compose down
    ```
+
+## Verification
+- Use `docker compose ps` to verify all required containers are running and healthy.

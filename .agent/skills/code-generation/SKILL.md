@@ -1,13 +1,16 @@
 ---
+name: Code Generation (sqlc)
 description: Generate Go code from SQL queries using sqlc
 ---
 # Code Generation (sqlc)
 
-This workflow regenerates the Go data access layer in the `read-service` whenever the SQL queries or the schema definition changes.
+## Context
+This skill regenerates the Go data access layer in the `read-service` whenever the SQL queries or the schema definition changes.
 
-1. Navigate to the `read-service` directory.
+## Guidelines
+1. Navigate to the `read-service` directory (assuming execution from project root).
    ```bash
-   cd /Users/sergiigagauz/Public/DevelopmentProjects/anomaly_detection_platform/read-service
+   cd read-service
    ```
 
 // turbo
@@ -20,3 +23,6 @@ This workflow regenerates the Go data access layer in the `read-service` wheneve
    ```bash
    go build ./...
    ```
+
+## Verification
+- Code successfully generates and compiles.

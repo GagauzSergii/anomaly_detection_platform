@@ -33,7 +33,7 @@ The entry point (gRPC/HTTP) written in Go.
 An ultra-fast compute engine (Go) operating entirely in-memory with no dedicated database.
 * **Responsibilities:** Subscribes to the `metric.recorded` stream. Evaluates metrics against strict rule chains and rapid statistical algorithms (e.g., MAD — Median Absolute Deviation). Upon breaching a threshold, it instantly publishes an `anomaly.detected` event.
 
-### 4) ML Predict Service (Predictive Engine) 🧠
+### 4) ML Predict Service (Predictive Engine)
 An asynchronous Python-based service dedicated to predictive analytics and uncovering hidden degradation patterns.
 * **Responsibilities:** Operates as an independent Consumer Group. Reads the `metric.recorded` stream from NATS, maintaining a sliding window of historical data in memory.
 * **Inference:** Feeds the sliding window into a pre-trained Deep Learning model (e.g., PyTorch/TensorFlow-based LSTM or Transformer). The model evaluates the probability of node failure within the next *N* minutes.

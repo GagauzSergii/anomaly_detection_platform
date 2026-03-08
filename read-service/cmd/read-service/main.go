@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "github.com/sergii-gagauz/anomaly_detection_platform/read-service/docs" // Swagger docs
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/modules/projections/anomaly_detected"
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/shared/config"
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/shared/logging"
@@ -16,6 +17,11 @@ import (
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/transport/http/gin"
 )
 
+// @title Anomaly Detection Read API
+// @version 1.0
+// @description This is the read-service API for querying anomalies and telemetry.
+// @host localhost:8080
+// @BasePath /
 func main() {
 	logging.Setup() // ATG Update: Initialize structured logging
 	cfg := config.Load()

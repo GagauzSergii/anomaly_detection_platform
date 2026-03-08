@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/dto"
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/shared/httpx"
 )
 
@@ -12,6 +13,23 @@ type HTTP struct{ handler *Handler }
 
 func NewHTTP(handler *Handler) *HTTP { return &HTTP{handler: handler} }
 
+// Handle processes the ListAnomalies HTTP request.
+// @Summary List detected anomalies
+// @Description List detected anomalies from the Postgres read model, filterable by various dimensions.
+// @Tags anomalies
+// @Accept json
+// @Produce json
+// @Param from query int false "From Timestamp"
+// @Param to query int false "To Timestamp"
+// @Param source query string false "Source System"
+// @Param metric query string false "Metric Name"
+// @Param env query string false "Environment"
+// @Param region query string false "Region"
+// @Param instance query string false "Instance ID"
+// @Param limit query int false "Limit" default(100)
+// @Param offset query int false "Offset" default(0)
+// @Success 200 {array} dto.AnomalyResponse
+// @Router /v1/anomalies [get]
 func (h *HTTP) Handle(c *gin.Context) {
 	qp := c.Query
 

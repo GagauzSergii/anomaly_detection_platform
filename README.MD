@@ -5,6 +5,7 @@
 ![Architecture](https://img.shields.io/badge/Architecture-Event--Driven%20%7C%20CQRS-blue)
 ![Database](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat&logo=postgresql)
 ![Broker](https://img.shields.io/badge/NATS-JetStream-27AE60?style=flat&logo=nats)
+![Swagger](https://img.shields.io/badge/Swagger-UI_Available-blue)
 
 ## 1. Executive Summary
 The **AIOps Anomaly Detection Platform** is a distributed, real-time system designed for telemetry ingestion, intelligent anomaly detection, and predictive service degradation analysis. 
@@ -43,6 +44,16 @@ An asynchronous Python-based service dedicated to predictive analytics and uncov
 ### 5) Read Service (Projection & Query API)
 The read layer (Go) within the CQRS paradigm.
 * **Responsibilities:** Listens for `anomaly.detected` and `degradation.predicted` events. Idempotently projects these events into a relational PostgreSQL schema (utilizing `pgxpool` and asynchronous batching). Exposes an optimized HTTP/gRPC API for client dashboards.
+
+---
+
+## 4. API Documentation
+The project follows the **OpenAPI 3.0** standard for documenting the Read Service Query APIs.
+You can explore the interactive API documentation and test endpoints directly via the Swagger UI.
+
+**Accessing Swagger UI:**
+1. Ensure the platform is running (e.g., via `docker-compose up` or passing `make run` in `read-service`).
+2. Navigate your browser to: [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
 
 ---
 

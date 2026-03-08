@@ -53,7 +53,7 @@ services:
       ANOMALIES_SUBJECT: "anomaly.detected"
       DURABLE_NAME: "read-service-anomalies-consumer"
     ports:
-      - "8080:8080"
+      - "8080:8080" # Swagger UI will be available here
     depends_on:
       nats:
         condition: service_started

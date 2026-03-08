@@ -19,8 +19,17 @@ migrate-up:
 	@if [ -z "$(POSTGRES_DSN)" ]; then echo "Error: POSTGRES_DSN is not set"; exit 1; fi
 	go run github.com/pressly/goose/v3/cmd/goose@latest -dir db/migrations postgres "$(POSTGRES_DSN)" up
 
-# 4. Build the service binary
-build: generate
+# 4. Generate Swagger documentation
+swagger:
+	@echo "==> Generating Swagger docs..."
+	@if ! command -v swag > /dev/null; then \
+		echo "Installing swag..."; \
+		go install github.com/swaggo/swag/cmd/swag@latest; \
+	fi
+	swag init -g cmd/read-service/main.go -o docs/
+
+# 5. Build the service binary
+build: generate swagger
 	@echo "==> Building binary..."
 	go build -o bin/read-service ./cmd/read-service
 

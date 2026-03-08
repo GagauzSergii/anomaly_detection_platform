@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/dto"
 	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/shared/httpx"
 )
 
@@ -19,7 +20,14 @@ func NewHTTP(handler *Handler) *HTTP {
 }
 
 // Handle processes the GetSeriesState HTTP request.
-// It parses the composite key from the URL parameter and invokes the domain handler.
+// @Summary Retrieve telemetry state
+// @Description Retrieve detailed telemetry state (parameters and latest values) for a specific metric series by its key.
+// @Tags metrics
+// @Accept json
+// @Produce json
+// @Param key path string true "Composite Key: source|metric|env|region"
+// @Success 200 {object} dto.SeriesStateResponse
+// @Router /v1/series/state/{key} [get]
 func (h *HTTP) Handle(ctx *gin.Context) {
 	keyStr := ctx.Param("key")
 	// Expected format: source|metric|env|region

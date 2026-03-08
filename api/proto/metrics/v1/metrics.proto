@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package metrics.v1;
+
+option go_package = "github.com/sergii-gagauz/anomaly_detection_platform/api/gen/metrics/v1;metricsv1";
+
+
+// MetricsService is the public API for recording telemetry data.
+service MetricsService {
+  // RecordMetric accepts a single metric data point.
+  rpc RecordMetric(RecordMetricRequest) returns (RecordMetricResponse);
+}
+
+message RecordMetricRequest {
+  string source      = 1; // e.g. "orders-service"
+  string metric_name = 2; // e.g. "cpu_usage_percent"
+  double value       = 3;
+  string env         = 4; // e.g. "prod"
+  string region      = 5; // e.g. "eu-central-1"
+  string instance_id = 6; // e.g. "pod-123"
+  int64  timestamp   = 7; // unix epoch seconds
+}
+
+message RecordMetricResponse {
+  bool accepted = 1;
+}

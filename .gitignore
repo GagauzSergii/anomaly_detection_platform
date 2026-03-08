@@ -1,0 +1,112 @@
+# =========================
+# Go
+# =========================
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+bin/
+build/
+dist/
+out/
+
+*.test
+*.out
+coverage.out
+
+vendor/
+
+!go.mod
+!go.sum
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# virtual environments
+env/
+venv/
+.venv/
+
+# packaging
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Python tooling
+.pytest_cache/
+__pypackages__/
+.ipynb_checkpoints/
+
+# =========================
+# Tools & IDEs
+# =========================
+.idea/
+*.iws
+*.iml
+*.ipr
+
+.vscode/
+*.code-workspace
+.history/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# =========================
+# Environment & Secrets
+# =========================
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+!.env.example
+!.env.template
+
+# =========================
+# Logs & Temp
+# =========================
+*.log
+logs/
+tmp/
+temp/
+
+*.swp
+*~
+*.bak
+*.tmp
+
+# =========================
+# Docker & Infrastructure
+# =========================
+nats-data/
+postgres-data/
+redis-data/
+docker-data/
+volumes/
+.docker/
+
+# =========================
+# ML models
+# =========================
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.joblib
+*.model

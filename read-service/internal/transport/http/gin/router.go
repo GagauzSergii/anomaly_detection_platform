@@ -1,0 +1,42 @@
+package gin
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5/pgxpool"
+
+	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/modules/anomalies/features/list_anomalies"
+	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/modules/series/features/get_series_state"
+	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/modules/series/features/list_series"
+	"github.com/sergii-gagauz/anomaly_detection_platform/read-service/internal/shared/postgres/db"
+)
+
+func NewRouter(pool *pgxpool.Pool) *gin.Engine {
+	router := gin.New()
+	router.Use(gin.Recovery())
+	router.Use(RequestID())
+
+	queries := db.New(pool)
+
+	router.GET("/health", func(ctx *gin.Context) { ctx.String(http.StatusOK, "ok") })
+	router.GET("/ready", func(ctx *gin.Context) {
+		if err := pool.Ping(ctx.Request.Context()); err != nil {
+			ctx.String(http.StatusServiceUnavailable, "db is not ready")
+			return
+		}
+		ctx.String(http.StatusOK, "ok")
+	})
+
+	listSeriesHTTP := list_series.NewHTTP(list_series.NewHandler(list_series.NewRepo(queries)))
+
+	// ATG Update
+	getSeriesHTTP := get_series_state.NewHTTP(get_series_state.NewHandler(get_series_state.NewRepo(queries)))
+	listAnomaliesHTTP := list_anomalies.NewHTTP(list_anomalies.NewHandler(list_anomalies.NewRepo(queries)))
+
+	router.GET("/v1/series", listSeriesHTTP.Handle)
+	router.GET("/v1/series/state/:key", getSeriesHTTP.Handle)
+	router.GET("/v1/anomalies", listAnomaliesHTTP.Handle)
+
+	return router
+}

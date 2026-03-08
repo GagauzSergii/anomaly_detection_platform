@@ -1,0 +1,21 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    schema: "db/migrations"
+
+    queries:
+      - "internal/modules/anomalies/features/list_anomalies/sql/list_anomalies.sql"
+      - "internal/modules/projections/anomaly_detected/sql/try_mark_processed.sql"
+      - "internal/modules/projections/anomaly_detected/sql/insert_anomaly_event.sql"
+      - "internal/modules/projections/anomaly_detected/sql/upsert_series_state.sql"
+      - "internal/modules/series/features/list_series/list_series.sql"
+      - "/internal/modules/series/features/get_series_state/get_series_state.sql"
+
+    gen:
+      go:
+        package: "db"
+        out: "internal/shared/postgres/db"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+        emit_interface: false
+        emit_prepared_queries: true
